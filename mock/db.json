@@ -1,0 +1,28 @@
+{
+  "hotel": [{
+    "id": 1,
+    "star": 5,
+    "name": "임피리얼 팰리스 서울",
+    "address": "서울시 강남구 논현동 248-7",
+    "ratings": 4,
+    "reviews": 1144,
+    "tags": ["비즈니스", "쇼핑", "가족", "럭셔리", "스파", "로맨틱", "부티끄"],
+    "amenities": ["와이파이", "수영장", "주차장", "레스토랑"]
+  }],
+  "reviews": [{
+    "info": {
+      "total_review_count": 9999,
+      "rating": 5
+    },
+    "data": [
+      {
+        "published_date": "2019-12-20",
+        "rating": 4,
+        "travel_date": "2019-11-14",
+        "content": " ",
+        "username": "김수영",
+        "title": " "
+      }
+    ]
+  }]
+}
