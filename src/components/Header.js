@@ -8,10 +8,10 @@ const Header = () => {
           Tripbtoz
         </Div>
         <Div style={{ display: 'flex' }}>
-          <Div>고객센터</Div>
-          <Div>예약확인</Div>
-          <Div>회원가입</Div>
-          <Div>로그인</Div>
+          <Div style={{ marginLeft: '10px' }}>고객센터</Div>
+          <Div style={{ marginLeft: '10px' }}>예약확인</Div>
+          <Div style={{ marginLeft: '10px' }}>회원가입</Div>
+          <Div style={{ marginLeft: '10px' }}>로그인</Div>
         </Div>
       </HeaderInnerWrap>
     </HeaderWrap>

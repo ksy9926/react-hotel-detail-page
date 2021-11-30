@@ -4,25 +4,43 @@
     "star": 5,
     "name": "임피리얼 팰리스 서울",
     "address": "서울시 강남구 논현동 248-7",
-    "ratings": 4,
+    "ratings": 4.5,
     "reviews": 1144,
     "tags": ["비즈니스", "쇼핑", "가족", "럭셔리", "스파", "로맨틱", "부티끄"],
-    "amenities": ["와이파이", "수영장", "주차장", "레스토랑"]
+    "amenities": ["와이파이", "수영장", "주차장", "레스토랑", "드라이기", "테니스", "피트니스", "금연", "장애인편의", "탁구"]
   }],
   "reviews": [{
     "info": {
-      "total_review_count": 9999,
-      "rating": 5
+      "total_review_count": 1144,
+      "rating": 4.5
     },
     "data": [
       {
-        "published_date": "2019-12-20",
+        "published_date": "2021-11-07",
         "rating": 4,
-        "travel_date": "2019-11-14",
-        "content": " ",
+        "travel_date": "2021-11-04",
+        "content": "비즈니스와 문화의 중심지인 서울 강남에 위치한 임피리얼 팰리스 서울은 'The Best of Everything'을 모토로, 한국에서 유일하게 품격과 문화가 있는 호텔로 유명합니다.",
         "username": "김수영",
-        "title": " "
+        "title": "국내 숙박으로 제격인 명품 호텔"
+      },
+      {
+        "published_date": "2021-7-20",
+        "rating": 5,
+        "travel_date": "2021-06-30",
+        "content": "강남 한복판에 생긴 고퀄리티 호텔. 일상에 지치신 분들이 쉬어가기에 좋은 호텔인 것 같습니다. 저 역시 만족스럽게 이용해서 다음에도 또 예약해서 이용하려고 합니다. 트립비토즈 짱 최고 프론트엔드 화이팅",
+        "username": "피카츄",
+        "title": "호텔예약은 역시 트립비토즈"
       }
     ]
-  }]
+  }],
+  "rooms": [{
+    "title": "디럭스 더블룸",
+    "images": ["images/1.jpeg", "images/14.jpeg", "images/16.jpeg", "images/25.jpeg", "images/24.jpeg"],
+    "bed": "더블침대 1개",
+    "size": 37,
+    "personnel": 3,
+    "options": [
+      {"discount":"조기", "price": 267000, "tax_price":293700, "tags":["무료 WiFi", "무료 주차", "뷔페아침식사"], "warning":"환불 불가"}
+    ]
+  }, {}]
 }

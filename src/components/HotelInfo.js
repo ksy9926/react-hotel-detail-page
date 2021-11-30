@@ -24,7 +24,7 @@ const HotelInfo = () => {
 
   const rating =
     hotelInfo.ratings &&
-    [1, 2, 3, 4, 5].map((item) => <Rating key={item} filled={hotelInfo.ratings >= item} />);
+    [1, 2, 3, 4, 5].map((item) => <Rating key={item} filled={hotelInfo.ratings - item} />);
 
   const hotelTag = hotelInfo.tags?.map((item) => <Tag key={item}>#{item}</Tag>);
 
@@ -35,7 +35,7 @@ const HotelInfo = () => {
       <HotelAddress>{hotelInfo.address}</HotelAddress>
       <HotelRating>
         {rating}
-        <HotelReview>총 {hotelInfo.reviews}건의 리뷰</HotelReview>
+        <HotelReview>총 {hotelInfo.reviews?.toLocaleString()}건의 리뷰</HotelReview>
       </HotelRating>
       <HotelTag>{hotelTag}</HotelTag>
     </HotelWrap>

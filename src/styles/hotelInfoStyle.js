@@ -38,11 +38,21 @@ const Rating = styled.div`
   border: 1px solid #00aa6c;
   margin: 0 2px;
 
-  ${(props) =>
-    props.filled &&
-    css`
-      background: #00aa6c;
-    `}
+  ${(props) => {
+    if (props.filled >= 0) {
+      return css`
+        background: #00aa6c;
+      `;
+    } else if (props.filled === -0.5) {
+      return css`
+        background: linear-gradient(90deg, #00aa6c 50%, #ffffff 50%);
+      `;
+    } else {
+      return css`
+        background: #ffffff;
+      `;
+    }
+  }}
 `;
 
 const HotelReview = styled.div`
@@ -60,7 +70,7 @@ const HotelTag = styled.ul`
 const Tag = styled.li`
   padding: 3px 8px;
   border-radius: 10px;
-  margin: 8px 10px 0 0;
+  margin: 8px 5px 0;
 
   background: rgb(245, 245, 245);
   font-size: 0.9rem;

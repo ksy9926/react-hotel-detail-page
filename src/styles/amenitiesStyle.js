@@ -21,6 +21,9 @@ const Ul = styled.ul`
 `;
 
 const Li = styled.li`
+  display: flex;
+  align-items: center;
+
   width: 33%;
   margin: 10px 0;
   color: rgb(142, 142, 180);

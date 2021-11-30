@@ -1,5 +1,5 @@
 import Header from 'components/Header';
-import Slider from 'components/Slider';
+import Carousel from 'components/Carousel';
 import Guestroom from 'components/Guestroom';
 import Amenities from 'components/Amenities';
 import Review from 'components/Review';
@@ -13,7 +13,7 @@ function App() {
       <Main>
         <div style={{ width: '100%', maxWidth: '976px', display: 'flex', padding: '20px' }}>
           <div style={{ flex: 3, background: '#e8e8e8' }}>
-            <Slider />
+            <Carousel />
             <Guestroom />
             <Amenities />
             <Review />
