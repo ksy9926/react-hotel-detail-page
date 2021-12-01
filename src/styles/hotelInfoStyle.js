@@ -19,15 +19,16 @@ const HotelName = styled.h3`
 `;
 
 const HotelAddress = styled.div`
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 
   font-size: 0.8rem;
 `;
 
 const HotelRating = styled.div`
   display: flex;
+  align-items: center;
 
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 `;
 
 const Rating = styled.div`

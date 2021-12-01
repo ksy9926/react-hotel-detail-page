@@ -11,10 +11,7 @@ const Title = styled.h4`
   display: flex;
   justify-content: space-between;
   align-items: center;
-
-  padding-bottom: 10px;
-  border-bottom: 1px solid #e8e8e8;
-  margin: 0 0 10px;
+  margin: 0 0 20px;
 `;
 
 const SubInfo = styled.span`
@@ -64,4 +61,77 @@ const ReviewButton = styled.button`
   cursor: pointer;
 `;
 
-export { ReviewWrap, Title, SubInfo, Rating, ReviewButton };
+const Ul = styled.ul``;
+
+const Li = styled.li`
+  padding-top: 30px;
+  border-top: 1px solid #e8e8e8;
+  margin-bottom: 30px;
+`;
+
+const Username = styled.span`
+  margin-right: 10px;
+
+  font-weight: bold;
+`;
+
+const PublishedDate = styled.span`
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #c1c1c1;
+`;
+
+const Area = styled.div`
+  margin-top: 5px;
+
+  font-size: 0.8rem;
+`;
+
+const UserRating = styled.div`
+  display: flex;
+
+  margin: 15px 0 10px;
+`;
+
+const ReviewTitle = styled.div`
+margin-bottom: 5px  
+font-size: 1.2rem;
+  font-weight: bold;
+`;
+
+const TravelDate = styled.div`
+  margin-bottom: 10px;
+
+  font-size: 0.9rem;
+  color: #a1a1a1;
+`;
+
+const Content = styled.div`
+  margin-bottom: 20px;
+  color: #555555;
+`;
+
+const Toggle = styled.span`
+  font-weight: 500;
+  color: rgb(142, 142, 180);
+
+  cursor: pointer;
+`;
+
+export {
+  ReviewWrap,
+  Title,
+  SubInfo,
+  Rating,
+  ReviewButton,
+  Ul,
+  Li,
+  Username,
+  PublishedDate,
+  Area,
+  UserRating,
+  ReviewTitle,
+  TravelDate,
+  Content,
+  Toggle,
+};

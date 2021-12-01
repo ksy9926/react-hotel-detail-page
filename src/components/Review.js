@@ -1,58 +1,86 @@
 import React, { useState, useEffect } from 'react';
-import { ReviewWrap, Title, Rating, SubInfo, ReviewButton } from 'styles/reviewStyle';
-
-const url = 'http://localhost:4000/reviews';
+import { api } from 'api/api';
+import {
+  ReviewWrap,
+  Title,
+  Rating,
+  SubInfo,
+  ReviewButton,
+  Ul,
+  Li,
+  Username,
+  PublishedDate,
+  Area,
+  UserRating,
+  ReviewTitle,
+  TravelDate,
+  Content,
+  Toggle,
+} from 'styles/reviewStyle';
+import { Div, FlexBox, I } from 'styles/commonStyle';
 
 const Review = () => {
   const [reviewInfo, setReviewInfo] = useState({});
   const [reviews, setReviews] = useState([]);
+  const [more, setMore] = useState([]);
 
   useEffect(() => {
-    fetch(url, { method: 'GET' })
+    fetch(api + '/reviews', { method: 'GET' })
       .then((res) => res.json())
       .then((res) => {
         setReviewInfo(res[0].info);
-        setReviews(res[0].data);
+        setReviews(res[0].data.slice(0, 2));
+        setMore(Array(reviews.length).fill(false));
       });
   }, []);
+
+  const moreHandler = (idx) => {
+    const newMore = [...more];
+    newMore[idx] = !newMore[idx];
+    setMore(newMore);
+  };
 
   const rating =
     reviewInfo.rating &&
     [1, 2, 3, 4, 5].map((item) => <Rating key={item} filled={reviewInfo.rating - item} />);
 
-  const personalRating =
-    reviews[0]?.rating &&
-    [1, 2, 3, 4, 5].map((item) => <Rating key={item} filled={reviews[0].rating - item} />);
+  const reviewList = reviews.map((item, idx) => {
+    const personalRating = [1, 2, 3, 4, 5].map((rate) => (
+      <Rating key={rate} filled={item.rating - rate} />
+    ));
+
+    return (
+      <Li key={idx}>
+        <Div>
+          <Username>{item.username}</Username>
+          <PublishedDate>{item.published_date}</PublishedDate>
+        </Div>
+        <Area>서울, 대한민국</Area>
+        <UserRating>{personalRating}</UserRating>
+        <ReviewTitle>{item.title}</ReviewTitle>
+        <TravelDate>방문일: {item.travel_date}</TravelDate>
+        <Content className={more[idx] ? '' : 'hidden'}>{item.content}</Content>
+        <Toggle onClick={() => moreHandler(idx)}>
+          <I className={`fas fa-chevron-${more[idx] ? 'up' : 'down'}`}></I>{' '}
+          {more[idx] ? '접기' : '더 보기'}
+        </Toggle>
+      </Li>
+    );
+  });
 
   return (
     <ReviewWrap>
       <Title>
-        <div style={{ display: 'flex' }}>
+        <FlexBox>
           리뷰
           <SubInfo>
             {rating} {reviewInfo.rating}/5.0 (총 {reviewInfo.total_review_count?.toLocaleString()}
             개의 리뷰)
           </SubInfo>
-        </div>
+        </FlexBox>
         <ReviewButton>리뷰쓰기</ReviewButton>
       </Title>
-      <ul>
-        <div>
-          <span style={{ fontWeight: 'bold', marginRight: '10px' }}>{reviews[0]?.username}</span>
-          <span style={{ fontSize: '0.9rem', fontWeight: '500', color: '#c1c1c1' }}>
-            {reviews[0]?.published_date}
-          </span>
-        </div>
-        <div style={{ fontSize: '0.8rem', marginTop: '5px' }}>서울, 대한민국</div>
-        <div style={{ margin: '15px 0 10px', display: 'flex' }}>{personalRating}</div>
-        <div style={{ fontWeight: 'bold', fontSize: '1.2rem', marginBottom: '5px' }}>
-          {reviews[0]?.title}
-        </div>
-        <div style={{ fontSize: '0.9rem', color: '#a1a1a1', marginBottom: '10px' }}>
-          방문일: {reviews[0]?.travel_date}
-        </div>
-        <div style={{ color: '#555555' }}>{reviews[0]?.content}</div>
-      </ul>
+      <Ul>{reviewList}</Ul>
     </ReviewWrap>
   );
 };

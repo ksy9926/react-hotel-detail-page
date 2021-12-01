@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react';
+import { getFreeCancelDate } from 'utils/date';
+import { api } from 'api/api';
 import {
   GuestroomWrap,
   RoomInfo,
@@ -22,23 +24,43 @@ import {
   PriceSpan,
   TaxPrice,
   Warning,
+  Badge,
+  FreeCancelDate,
   ReserveBtn,
 } from 'styles/guestroomStyle';
-
-const url = 'http://localhost:4000/rooms';
 
 const Guestroom = () => {
   const [rooms, setRooms] = useState([]);
 
   useEffect(() => {
-    fetch(url, { method: 'GET' })
+    fetch(api + '/rooms', { method: 'GET' })
       .then((res) => res.json())
       .then((res) => setRooms(res));
   }, []);
 
-  console.log(rooms);
-
   const tags = rooms[0]?.options[0].tags?.map((item) => <Tag key={item}>{item}</Tag>);
+
+  const options = rooms[0]?.options.map((item, idx) => (
+    <Option key={idx}>
+      <TagWrap>{tags}</TagWrap>
+      <ReserveWrap>
+        <Warning>
+          <Badge badge={item.warning}>{item.warning}</Badge>
+          {item.warning === '무료 취소' && (
+            <FreeCancelDate>{getFreeCancelDate()} 전까지</FreeCancelDate>
+          )}
+        </Warning>
+        <PriceWrap>
+          <Discount>{item.discount}</Discount>
+          <Price>
+            1박 <PriceSpan>{item.price.toLocaleString()} 원</PriceSpan>
+          </Price>
+          <TaxPrice>세금 및 봉사료 포함 {item.tax_price.toLocaleString()}원</TaxPrice>
+          <ReserveBtn>예약</ReserveBtn>
+        </PriceWrap>
+      </ReserveWrap>
+    </Option>
+  ));
 
   return (
     <GuestroomWrap>
@@ -70,24 +92,7 @@ const Guestroom = () => {
           </SizeWrap>
         </InfoWrap>
       </RoomInfo>
-      <RoomOptions>
-        <Option>
-          <TagWrap>{tags}</TagWrap>
-          <ReserveWrap>
-            <Warning>환불 불가</Warning>
-            <PriceWrap>
-              <Discount>조기 예약 시 10% 할인</Discount>
-              <Price>
-                1박 <PriceSpan>{rooms[0]?.options[0].price.toLocaleString()} 원</PriceSpan>
-              </Price>
-              <TaxPrice>
-                세금 및 봉사료 포함 {rooms[0]?.options[0].tax_price.toLocaleString()}원
-              </TaxPrice>
-              <ReserveBtn>예약</ReserveBtn>
-            </PriceWrap>
-          </ReserveWrap>
-        </Option>
-      </RoomOptions>
+      <RoomOptions>{options && options}</RoomOptions>
     </GuestroomWrap>
   );
 };

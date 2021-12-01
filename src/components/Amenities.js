@@ -2,15 +2,14 @@ import { useState, useEffect } from 'react';
 import { AmenitiesWrap, Title, Ul, Li, Amenity, Toggle } from 'styles/amenitiesStyle';
 import { I } from 'styles/commonStyle';
 import { AMENITY_ICON } from 'constants/constants';
-
-const url = 'http://localhost:4000/hotel';
+import { api } from 'api/api';
 
 const Amenities = () => {
   const [amenities, setAmenities] = useState([]);
   const [seeMore, setSeeMore] = useState(false);
 
   useEffect(() => {
-    fetch(url, { method: 'GET' })
+    fetch(api + '/hotel', { method: 'GET' })
       .then((res) => res.json())
       .then((res) => setAmenities(res[0].amenities));
   }, []);

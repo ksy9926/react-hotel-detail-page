@@ -98,6 +98,7 @@ const Option = styled.div`
   padding: 10px;
   border: 1px solid #eeeeee;
   border-radius: 5px;
+  margin-bottom: 10px;
 `;
 
 const TagWrap = styled.div`
@@ -123,13 +124,32 @@ const ReserveWrap = styled.div`
 
 const Warning = styled.div`
   align-self: start;
+`;
 
+const Badge = styled.div`
   padding: 5px 10px;
   border-radius: 5px;
 
-  background: rgb(253, 242, 241);
+  background: ${(props) => props.badge === '환불 불가' && 'rgb(253, 242, 241)'};
   font-weight: bold;
-  color: rgb(235, 87, 72);
+  color: ${(props) => (props.badge === '환불 불가' ? 'rgb(235, 87, 72)' : '#0f77dd')};
+
+  &::after {
+    content: ${(props) => props.badge === '무료 취소' && "'i'"};
+
+    padding: 1px 7px;
+    margin-left: 5px;
+    border: 1px solid #0f77dd;
+    border-radius: 50%;
+
+    background: #0f77dd;
+    color: white;
+  }
+`;
+
+const FreeCancelDate = styled.div`
+  padding: 5px 10px;
+  color: #0f77dd;
 `;
 
 const PriceWrap = styled.div`
@@ -193,5 +213,7 @@ export {
   PriceSpan,
   TaxPrice,
   Warning,
+  Badge,
+  FreeCancelDate,
   ReserveBtn,
 };
