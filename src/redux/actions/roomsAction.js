@@ -1,5 +1,6 @@
 import { fetchRooms } from 'api/api';
 import { call, put, takeEvery } from 'redux-saga/effects';
+import { SET_LOADING } from './loadingAction';
 
 export const GET_ROOMS = 'GET_ROOMS';
 export const GET_ROOMS_SUCCESS = 'GET_ROOMS_SUCCESS';
@@ -14,6 +15,11 @@ function* getRoomsSaga() {
     yield put({
       type: GET_ROOMS_SUCCESS,
       payload: rooms[0],
+    });
+
+    yield put({
+      type: SET_LOADING,
+      payload: false,
     });
   } catch (e) {
     console.log('error 발생');

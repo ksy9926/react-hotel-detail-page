@@ -79,7 +79,7 @@ const Carousel = () => {
         <Count>
           {images.length
             ? currentSlide === -1
-              ? images.length
+              ? images.length + ' / ' + images.length
               : (currentSlide % images.length) + 1 + ' / ' + images.length
             : 'loading...'}
         </Count>

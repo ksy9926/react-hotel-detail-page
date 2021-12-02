@@ -1,5 +1,6 @@
 import { fetchReviews } from 'api/api';
 import { call, put, takeEvery } from 'redux-saga/effects';
+import { SET_LOADING } from './loadingAction';
 
 export const GET_REVIEWS = 'GET_REVIEWS';
 export const GET_REVIEWS_SUCCESS = 'GET_REVIEWS_SUCCESS';
@@ -15,6 +16,11 @@ function* getReviewsSaga() {
     yield put({
       type: GET_REVIEWS_SUCCESS,
       payload: reviews[0],
+    });
+
+    yield put({
+      type: SET_LOADING,
+      payload: false,
     });
   } catch (e) {
     console.log('error 발생');

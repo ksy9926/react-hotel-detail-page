@@ -5,10 +5,12 @@ import { reviewsSaga } from 'redux/actions/reviewsAction';
 import hotelInfo from 'redux/reducers/hotelInfoReducer';
 import rooms from 'redux/reducers/roomsReducer';
 import reviews from 'redux/reducers/reviewsReducer';
+import loading from 'redux/reducers/loadingReducer';
 
 const reducers = {
   hotelInfo,
   rooms,
+  loading,
   reviews,
 };
 
