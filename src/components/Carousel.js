@@ -8,26 +8,33 @@ import {
   PrevArrow,
   Count,
 } from 'styles/carouselStyle';
-import { TOTAL_SLIDES } from 'constants/constants';
 
 const Carousel = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [images, setImages] = useState([]);
+  const lastSlide = images.length - 1;
   const slideRef = useRef();
+
+  useEffect(() => {
+    fetch('https://picsum.photos/v2/list', { method: 'GET' })
+      .then((res) => res.json())
+      .then((res) => setImages(res.map((data) => data.download_url)));
+  }, []);
 
   useEffect(() => {
     slideRef.current.style.transform = `translateX(-${currentSlide + 1}00%)`;
   }, [currentSlide]);
 
   const nextSlide = () => {
-    if (currentSlide === TOTAL_SLIDES) {
-      slideRef.current.style.transition = 'all 0.3s ease-in-out';
+    if (currentSlide === lastSlide) {
+      slideRef.current.style.transition = 'all 0.3s ease';
       setCurrentSlide(currentSlide + 1);
       setTimeout(() => {
         slideRef.current.style.transition = '0s';
         setCurrentSlide(0);
       }, 300);
     } else {
-      slideRef.current.style.transition = 'all 0.3s ease-in-out';
+      slideRef.current.style.transition = 'all 0.3s ease';
       setCurrentSlide(currentSlide + 1);
     }
   };
@@ -38,7 +45,7 @@ const Carousel = () => {
       setCurrentSlide(currentSlide - 1);
       setTimeout(() => {
         slideRef.current.style.transition = '0s';
-        setCurrentSlide(TOTAL_SLIDES);
+        setCurrentSlide(lastSlide);
       }, 300);
     } else {
       slideRef.current.style.transition = 'all 0.3s ease-in-out';
@@ -46,17 +53,14 @@ const Carousel = () => {
     }
   };
 
-  const carousel = Array(30)
-    .fill(0)
-    .map((_, idx) => idx)
-    .map((item) => (
-      <img
-        src={`./images/${item}.jpeg`}
-        alt="테스트"
-        key={item}
-        style={{ width: '100%', height: '100%', flexShrink: 0 }}
-      ></img>
-    ));
+  const carousel = images.map((url) => (
+    <img
+      src={url}
+      alt="테스트"
+      key={url}
+      style={{ width: '100%', height: '100%', flexShrink: 0 }}
+    ></img>
+  ));
 
   return (
     <>
@@ -73,8 +77,11 @@ const Carousel = () => {
           <NextArrow />
         </NextButton>
         <Count>
-          {currentSlide === -1 ? carousel.length : (currentSlide % carousel.length) + 1} /{' '}
-          {carousel.length}
+          {images.length
+            ? currentSlide === -1
+              ? images.length
+              : (currentSlide % images.length) + 1 + ' / ' + images.length
+            : 'loading...'}
         </Count>
       </CarouselWrap>
     </>

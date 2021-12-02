@@ -1,21 +1,16 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
+import { shallowEqual, useSelector } from 'react-redux';
 import { AmenitiesWrap, Title, Ul, Li, Amenity, Toggle } from 'styles/amenitiesStyle';
 import { I } from 'styles/commonStyle';
 import { AMENITY_ICON } from 'constants/constants';
-import { api } from 'api/api';
 
 const Amenities = () => {
-  const [amenities, setAmenities] = useState([]);
-  const [seeMore, setSeeMore] = useState(false);
+  const hotelInfo = useSelector((state) => state.hotelInfo, shallowEqual);
+  const amenities = hotelInfo.amenities;
+  const [more, setMore] = useState(false);
 
-  useEffect(() => {
-    fetch(api + '/hotel', { method: 'GET' })
-      .then((res) => res.json())
-      .then((res) => setAmenities(res[0].amenities));
-  }, []);
-
-  const amenityList = amenities.map((item, idx) => {
-    if (!seeMore && idx > 5) return <div key={item}></div>;
+  const amenityList = amenities?.map((item, idx) => {
+    if (!more && idx > 5) return <div key={item}></div>;
 
     const paths = AMENITY_ICON[item].map((path) => (
       <path key={path} fillRule="evenodd" clipRule="evenodd" d={path} fill="#222222" />
@@ -37,13 +32,14 @@ const Amenities = () => {
     );
   });
 
+  console.log('편의시설: ', amenities);
+
   return (
     <AmenitiesWrap>
       <Title>편의시설 및 서비스</Title>
       <Ul>{amenityList}</Ul>
-      <Toggle onClick={() => setSeeMore(!seeMore)}>
-        <I className={`fas fa-chevron-${seeMore ? 'up' : 'down'}`}></I>{' '}
-        {seeMore ? '접기' : '더 보기'}
+      <Toggle onClick={() => setMore(!more)}>
+        <I className={`fas fa-chevron-${more ? 'up' : 'down'}`}></I> {more ? '접기' : '더 보기'}
       </Toggle>
     </AmenitiesWrap>
   );

@@ -1,6 +1,5 @@
-import { useState, useEffect } from 'react';
+import { shallowEqual, useSelector } from 'react-redux';
 import { getFreeCancelDate } from 'utils/date';
-import { api } from 'api/api';
 import {
   GuestroomWrap,
   RoomInfo,
@@ -30,37 +29,35 @@ import {
 } from 'styles/guestroomStyle';
 
 const Guestroom = () => {
-  const [rooms, setRooms] = useState([]);
+  const rooms = useSelector((state) => state.rooms, shallowEqual);
 
-  useEffect(() => {
-    fetch(api + '/rooms', { method: 'GET' })
-      .then((res) => res.json())
-      .then((res) => setRooms(res));
-  }, []);
+  const options = rooms.options?.map((item, idx) => {
+    const tags = item.tags.map((tag) => <Tag key={tag}>{tag}</Tag>);
 
-  const tags = rooms[0]?.options[0].tags?.map((item) => <Tag key={item}>{item}</Tag>);
+    return (
+      <Option key={idx}>
+        <TagWrap>{tags}</TagWrap>
+        <ReserveWrap>
+          <Warning>
+            <Badge badge={item.warning}>{item.warning}</Badge>
+            {item.warning === '무료 취소' && (
+              <FreeCancelDate>{getFreeCancelDate()} 전까지</FreeCancelDate>
+            )}
+          </Warning>
+          <PriceWrap>
+            <Discount>{item.discount}</Discount>
+            <Price>
+              1박 <PriceSpan>{item.price.toLocaleString()} 원</PriceSpan>
+            </Price>
+            <TaxPrice>세금 및 봉사료 포함 {item.tax_price.toLocaleString()}원</TaxPrice>
+            <ReserveBtn>예약</ReserveBtn>
+          </PriceWrap>
+        </ReserveWrap>
+      </Option>
+    );
+  });
 
-  const options = rooms[0]?.options.map((item, idx) => (
-    <Option key={idx}>
-      <TagWrap>{tags}</TagWrap>
-      <ReserveWrap>
-        <Warning>
-          <Badge badge={item.warning}>{item.warning}</Badge>
-          {item.warning === '무료 취소' && (
-            <FreeCancelDate>{getFreeCancelDate()} 전까지</FreeCancelDate>
-          )}
-        </Warning>
-        <PriceWrap>
-          <Discount>{item.discount}</Discount>
-          <Price>
-            1박 <PriceSpan>{item.price.toLocaleString()} 원</PriceSpan>
-          </Price>
-          <TaxPrice>세금 및 봉사료 포함 {item.tax_price.toLocaleString()}원</TaxPrice>
-          <ReserveBtn>예약</ReserveBtn>
-        </PriceWrap>
-      </ReserveWrap>
-    </Option>
-  ));
+  console.log('객실정보: ', rooms);
 
   return (
     <GuestroomWrap>
@@ -68,13 +65,15 @@ const Guestroom = () => {
         <ImgWrap>
           <Img
             alt="guestroom"
-            src={rooms[0]?.images[Math.floor(Math.random() * rooms[0].images.length)]}
+            src={
+              rooms.images?.length && rooms.images[Math.floor(Math.random() * rooms.images.length)]
+            }
           />
         </ImgWrap>
         <InfoWrap>
-          <Title>{rooms[0]?.title}</Title>
+          <Title>{rooms.title}</Title>
           <Personnel>
-            최대 {rooms[0]?.personnel}인 / {rooms[0]?.bed}
+            최대 {rooms.personnel}인 / {rooms.bed}
           </Personnel>
           <SizeWrap>
             <Size>
@@ -86,7 +85,7 @@ const Guestroom = () => {
                   fill="#222222"
                 />
               </SizeSvg>
-              객실면적 {rooms[0]?.size}제곱미터
+              객실면적 {rooms.size}제곱미터
             </Size>
             <Detail>자세히 보기 {'>'}</Detail>
           </SizeWrap>
