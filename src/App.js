@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { getHotelInfo } from 'redux/actions/hotelInfoAction';
+import { getHotelImg } from 'redux/actions/hotelImgAction';
 import { getRooms } from 'redux/actions/roomsAction';
 import { getReviews } from 'redux/actions/reviewsAction';
 import Header from 'components/Header';
@@ -15,16 +16,18 @@ import Loading from 'components/Loading';
 function App() {
   const dispatch = useDispatch();
   const loading = useSelector((state) => state.loading, shallowEqual);
+  const isLoading = loading.info || loading.img || loading.rooms || loading.reviews;
 
   useEffect(() => {
     dispatch(getHotelInfo());
+    dispatch(getHotelImg());
     dispatch(getRooms());
     dispatch(getReviews());
   }, [dispatch]);
 
   return (
     <>
-      {loading ? (
+      {isLoading ? (
         <Loading />
       ) : (
         <>

@@ -1,10 +1,11 @@
 import styled from 'styled-components';
 
-const CarouselWrap = styled.div`
+const CarouselWrap = styled.article`
   position: relative;
 
   height: 350px;
   width: 100%;
+
   overflow: hidden;
 `;
 
@@ -15,10 +16,19 @@ const ImgWrap = styled.div`
   height: 100%;
 `;
 
+const Img = styled.img`
+  flex-shrink: 0;
+
+  width: 100%;
+  height: 100%;
+
+  background: var(--color-green);
+`;
+
 const PrevButton = styled.button`
   position: absolute;
   top: 50%;
-  left: 20px;
+  left: var(--size-large);
   transform: translateY(-50%);
 
   width: 30px;
@@ -32,7 +42,7 @@ const PrevButton = styled.button`
 const NextButton = styled.button`
   position: absolute;
   top: 50%;
-  right: 20px;
+  right: var(--size-large);
   transform: translateY(-50%);
 
   width: 30px;
@@ -75,14 +85,14 @@ const Count = styled.div`
   position: absolute;
 
   left: 50%;
-  bottom: 20px;
+  bottom: var(--size-large);
   transform: translateX(-50%);
 
   padding: 4px 12px;
   border-radius: 15px;
 
-  background: #222222b3;
-  color: white;
+  background: var(--color-black-light);
+  color: #ffffff;
 `;
 
-export { CarouselWrap, ImgWrap, PrevButton, NextButton, PrevArrow, NextArrow, Count };
+export { CarouselWrap, ImgWrap, Img, PrevButton, NextButton, PrevArrow, NextArrow, Count };

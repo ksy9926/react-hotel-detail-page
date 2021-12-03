@@ -1,4 +1,4 @@
-import { GET_REVIEWS_SUCCESS } from 'redux/actions/reviewsAction';
+import { GET_REVIEWS_SUCCESS, GET_REVIEWS_FAIL } from 'redux/actions/reviewsAction';
 
 // 초기값
 const initialState = {};
@@ -9,6 +9,9 @@ const reducer = (state = initialState, action) => {
 
   switch (type) {
     case GET_REVIEWS_SUCCESS: {
+      return payload;
+    }
+    case GET_REVIEWS_FAIL: {
       return payload;
     }
     default:

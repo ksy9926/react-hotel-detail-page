@@ -33,7 +33,10 @@ const Amenity = styled.span`
   margin-left: 10px;
 `;
 
-const Toggle = styled.span`
+const Toggle = styled.div`
+  display: flex;
+  align-items: center;
+
   font-weight: 500;
   color: rgb(142, 142, 180);
 

@@ -1,3 +1,27 @@
+:root {
+  --color-main-a: #ff3052;
+  --color-main-b: #eeeeee;
+  --color-main-c: #8e8eb4;
+
+  --color-blue: #3675d6;
+  --color-green: #00aa6c;
+  --color-black-light: #222222b3;
+  --color-grey: #656565;
+
+  --size-small: 5px;
+  --size-middle: 10px;
+  --size-large: 20px;
+
+  --font-basic: 1rem;
+  --font-small: 0.9rem;
+  --font-large: 1.2rem;
+  --font-very-large: 1.5rem;
+
+  --weight-small: 300;
+  --weight-middle: 500;
+  --weight-large: 700;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',

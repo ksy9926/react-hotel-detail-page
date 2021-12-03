@@ -13,10 +13,9 @@ const Div = styled.div``;
 
 const FlexBox = styled.div`
   display: flex;
+  align-items: center;
 `;
 
 const Span = styled.span``;
 
-const I = styled.i``;
-
-export { Main, Div, I, FlexBox, Span };
+export { Main, Div, FlexBox, Span };

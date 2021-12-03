@@ -5,6 +5,7 @@ import {
   Title,
   Rating,
   SubInfo,
+  ReviewCount,
   ReviewButton,
   Ul,
   Li,
@@ -17,7 +18,8 @@ import {
   Content,
   Toggle,
 } from 'styles/reviewStyle';
-import { Div, FlexBox, I } from 'styles/commonStyle';
+import { Div, FlexBox } from 'styles/commonStyle';
+import { ArrowDownIcon, ArrowUpIcon, TripAdvisorIcon } from 'icons/icons';
 
 const Review = () => {
   const reviews = useSelector((state) => state.reviews, shallowEqual);
@@ -60,7 +62,7 @@ const Review = () => {
             <TravelDate>방문일: {item.travel_date}</TravelDate>
             <Content className={more[idx] ? '' : 'hidden'}>{item.content}</Content>
             <Toggle onClick={() => moreHandler(idx)}>
-              <I className={`fas fa-chevron-${more[idx] ? 'up' : 'down'}`}></I>{' '}
+              {more[idx] ? <ArrowUpIcon /> : <ArrowDownIcon />}
               {more[idx] ? '접기' : '더 보기'}
             </Toggle>
           </Li>
@@ -69,17 +71,18 @@ const Review = () => {
     [userReviews, more, moreHandler],
   );
 
-  console.log('리뷰정보: ', reviewInfo);
-  console.log('사용자 리뷰: ', userReviews);
-
   return (
     <ReviewWrap>
       <Title>
         <FlexBox>
           리뷰
+          <TripAdvisorIcon />
           <SubInfo>
-            {rating} {reviewInfo?.rating}/5.0 (총 {reviewInfo?.total_review_count?.toLocaleString()}
-            개의 리뷰)
+            {rating}
+            <ReviewCount>
+              {reviewInfo?.rating}/5.0 (총 {reviewInfo?.total_review_count?.toLocaleString()}개의
+              리뷰)
+            </ReviewCount>
           </SubInfo>
         </FlexBox>
         <ReviewButton>리뷰쓰기</ReviewButton>

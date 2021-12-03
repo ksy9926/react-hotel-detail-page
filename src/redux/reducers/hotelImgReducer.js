@@ -1,17 +1,16 @@
-import { GET_ROOMS_SUCCESS, GET_ROOMS_FAIL } from 'redux/actions/roomsAction';
+import { GET_HOTELIMG_SUCCESS, GET_HOTELIMG_FAIL } from 'redux/actions/hotelImgAction';
 
 // 초기값
-const initialState = {};
+const initialState = [];
 
-// 객실 정보 리듀서
+// 호텔 이미지 정보 리듀서
 const reducer = (state = initialState, action) => {
   const { type, payload } = action;
-
   switch (type) {
-    case GET_ROOMS_SUCCESS: {
+    case GET_HOTELIMG_SUCCESS: {
       return payload;
     }
-    case GET_ROOMS_FAIL: {
+    case GET_HOTELIMG_FAIL: {
       return payload;
     }
     default:

@@ -1,7 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { shallowEqual, useSelector } from 'react-redux';
 import {
   CarouselWrap,
   ImgWrap,
+  Img,
   NextButton,
   PrevButton,
   NextArrow,
@@ -10,16 +12,10 @@ import {
 } from 'styles/carouselStyle';
 
 const Carousel = () => {
+  const images = useSelector((state) => state.hotelImg, shallowEqual);
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [images, setImages] = useState([]);
   const lastSlide = images.length - 1;
   const slideRef = useRef();
-
-  useEffect(() => {
-    fetch('https://picsum.photos/v2/list', { method: 'GET' })
-      .then((res) => res.json())
-      .then((res) => setImages(res.map((data) => data.download_url)));
-  }, []);
 
   useEffect(() => {
     slideRef.current.style.transform = `translateX(-${currentSlide + 1}00%)`;
@@ -53,14 +49,7 @@ const Carousel = () => {
     }
   };
 
-  const carousel = images.map((url) => (
-    <img
-      src={url}
-      alt="테스트"
-      key={url}
-      style={{ width: '100%', height: '100%', flexShrink: 0 }}
-    ></img>
-  ));
+  const carousel = images.map((url) => <Img src={url} alt="테스트" key={url}></Img>);
 
   return (
     <>

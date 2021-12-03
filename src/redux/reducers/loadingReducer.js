@@ -1,7 +1,12 @@
 import { GET_LOADING, SET_LOADING } from 'redux/actions/loadingAction';
 
 // 초기값
-const initialState = true;
+const initialState = {
+  img: true,
+  info: true,
+  rooms: true,
+  reviews: true,
+};
 
 // 호텔 정보 리듀서
 const reducer = (state = initialState, action) => {
@@ -12,7 +17,7 @@ const reducer = (state = initialState, action) => {
       return state;
     }
     case SET_LOADING: {
-      return payload;
+      return { ...state, ...payload };
     }
     default:
       return state;

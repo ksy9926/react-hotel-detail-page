@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import 'index.css';
 
 const HeaderWrap = styled.header`
   display: flex;
@@ -19,6 +20,23 @@ const HeaderInnerWrap = styled.div`
   padding: 19px 24px;
 `;
 
-const Div = styled.div``;
+const LogoDiv = styled.div`
+  display: flex;
+  align-items: center;
 
-export { HeaderWrap, HeaderInnerWrap, Div };
+  font-size: var(--font-very-large);
+  font-weight: bold;
+  color: var(--color-main-a);
+`;
+
+const NavDiv = styled.div`
+  display: flex;
+
+  font-weight: var(--weight-large);
+`;
+
+const Div = styled.div`
+  margin-left: var(--size-middle);
+`;
+
+export { HeaderWrap, HeaderInnerWrap, LogoDiv, NavDiv, Div };

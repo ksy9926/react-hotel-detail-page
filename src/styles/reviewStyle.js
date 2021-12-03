@@ -18,10 +18,12 @@ const SubInfo = styled.span`
   display: flex;
   align-items: center;
 
-  margin-left: 10px;
-
   font-size: 0.8rem;
   font-weight: 500;
+`;
+
+const ReviewCount = styled.span`
+  margin-left: 5px;
 `;
 
 const Rating = styled.div`
@@ -112,6 +114,9 @@ const Content = styled.div`
 `;
 
 const Toggle = styled.span`
+  display: flex;
+  align-items: center;
+
   font-weight: 500;
   color: rgb(142, 142, 180);
 
@@ -122,6 +127,7 @@ export {
   ReviewWrap,
   Title,
   SubInfo,
+  ReviewCount,
   Rating,
   ReviewButton,
   Ul,

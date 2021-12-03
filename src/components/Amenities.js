@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { shallowEqual, useSelector } from 'react-redux';
 import { AmenitiesWrap, Title, Ul, Li, Amenity, Toggle } from 'styles/amenitiesStyle';
-import { I } from 'styles/commonStyle';
+import { ArrowDownIcon, ArrowUpIcon } from 'icons/icons';
 import { AMENITY_ICON } from 'constants/constants';
 
 const Amenities = () => {
@@ -32,14 +32,13 @@ const Amenities = () => {
     );
   });
 
-  console.log('편의시설: ', amenities);
-
   return (
     <AmenitiesWrap>
       <Title>편의시설 및 서비스</Title>
       <Ul>{amenityList}</Ul>
       <Toggle onClick={() => setMore(!more)}>
-        <I className={`fas fa-chevron-${more ? 'up' : 'down'}`}></I> {more ? '접기' : '더 보기'}
+        {more ? <ArrowUpIcon /> : <ArrowDownIcon />}
+        {more ? '접기' : '더 보기'}
       </Toggle>
     </AmenitiesWrap>
   );

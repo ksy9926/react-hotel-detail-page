@@ -1,9 +1,4 @@
-import React from 'react';
-import { shallowEqual, useSelector } from 'react-redux';
-
 const Loading = () => {
-  const loading = useSelector((state) => state.loading, shallowEqual);
-
   return (
     <div
       style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100vh' }}

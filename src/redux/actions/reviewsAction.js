@@ -4,6 +4,7 @@ import { SET_LOADING } from './loadingAction';
 
 export const GET_REVIEWS = 'GET_REVIEWS';
 export const GET_REVIEWS_SUCCESS = 'GET_REVIEWS_SUCCESS';
+export const GET_REVIEWS_FAIL = 'GET_REVIEWS_FAIL';
 
 // 리뷰 정보 불러오기 액션
 export const getReviews = () => ({ type: GET_REVIEWS });
@@ -20,11 +21,16 @@ function* getReviewsSaga() {
 
     yield put({
       type: SET_LOADING,
-      payload: false,
+      payload: { reviews: false },
     });
   } catch (e) {
-    console.log('error 발생');
-    yield put();
+    yield put({
+      type: GET_REVIEWS_FAIL,
+      payload: {
+        status: 'error',
+        message: '알 수 없는 오류로 리뷰 정보를 불러오는데 실패하였습니다.',
+      },
+    });
   }
 }
 

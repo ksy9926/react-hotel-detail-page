@@ -1,4 +1,4 @@
-import { GET_HOTELINFO_SUCCESS } from 'redux/actions/hotelInfoAction';
+import { GET_HOTELINFO_SUCCESS, GET_HOTELINFO_FAIL } from 'redux/actions/hotelInfoAction';
 
 // 초기값
 const initialState = {};
@@ -9,6 +9,9 @@ const reducer = (state = initialState, action) => {
 
   switch (type) {
     case GET_HOTELINFO_SUCCESS: {
+      return payload;
+    }
+    case GET_HOTELINFO_FAIL: {
       return payload;
     }
     default:
